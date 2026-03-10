@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Paper accepted at NeurIPS 2026",
+    "date": "2026-02-12",
+    "url": "https://example.edu/news/neurips-2026",
+    "external": true
+  },
+  {
+    "title": "New PhD student joins the lab",
+    "date": "2026-01-18",
+    "url": "",
+    "external": false
+  },
+  {
+    "title": "Workshop on safe reinforcement learning",
+    "date": "2025-11-03",
+    "url": "https://example.edu/workshop/safe-rl",
+    "external": true
+  },
+  {
+    "title": "Workshop on safe reinforcement learning",
+    "date": "2025-11-05",
+    "url": "https://example.edu/workshop/safe-rl",
+    "external": true
+  }
+]

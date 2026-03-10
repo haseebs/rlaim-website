@@ -1,0 +1,65 @@
+{
+  "siteName": "Reinforcement Learning and Intelligent Agents Lab",
+  "shortName": "RLAI Lab",
+  "facultyName": "Martha White",
+  "facultyTitle": "Associate Professor of Computing Science, CEO of RLCore",
+  "institution": "University of Alberta",
+  "description": "Academic wesbite for Martha White's research lab, focused on reinforcement learning and intelligent agents.",
+  "homeImage": "/assets/images/martha-white-headshot.jpg",
+  "photoImage": "/assets/images/martha-white-photo.jpg",
+  "groupPhoto": "/assets/images/martha-white-group-2023.png",
+  "contact": {
+    "email": "whitem@ualberta.ca",
+    "office": "UCOMM 7-243",
+    "address": "Department of Computing Science, University of Alberta",
+    "position": "Associate Professor",
+    "affiliations": [
+      {
+        "label": "Reinforcement Learning and AI Lab (RLAI)",
+        "url": "https://rlai.ualberta.ca/"
+      },
+      {
+        "label": "Alberta Machine Intelligence Institute (Amii)",
+        "url": "https://www.amii.ca/"
+      },
+      {
+        "label": "Canada CIFAR AI Chair",
+        "url": "https://cifar.ca/"
+      },
+      {
+        "label": "RLCore",
+        "url": "https://rlcore.ai/"
+      }
+    ],
+    "profileLinks": [
+      {
+        "label": "Curriculum Vitae",
+        "url": "https://webdocs.cs.ualberta.ca/~whitem/cv/cv.pdf"
+      },
+      {
+        "label": "Bio and Photo",
+        "url": "https://webdocs.cs.ualberta.ca/~whitem/bio.html"
+      }
+    ],
+    "calendarLinks": [
+      {
+        "label": "Weekly calendar",
+        "url": "https://calendar.google.com/calendar/embed?mode=WEEK&height=600&wkst=2&bgcolor=%23FFFFFF&src=whitem%40ualberta.ca&color=%23333333&ctz=America%2FEdmonton"
+      },
+      {
+        "label": "Important dates and deadlines",
+        "url": "https://calendar.google.com/calendar/embed?title=Important%20dates%20and%20deadlines&mode=AGENDA&height=600&wkst=1&bgcolor=%23FFFFFF&src=9rjj5ikcmdtqp1h7lvqhd41rqk%40group.calendar.google.com&color=%23711616&ctz=America%2FEdmonton"
+      }
+    ]
+  },
+  "socialLinks": [
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.ca/"
+    },
+    {
+      "label": "RLCore",
+      "url": "https://rlcore.ai/"
+    }
+  ]
+}

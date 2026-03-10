@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Home",
+    "url": "/"
+  },
+  {
+    "label": "Lab",
+    "url": "/lab/"
+  },
+  {
+    "label": "Publications",
+    "url": "/publications/"
+  },
+  {
+    "label": "Teaching",
+    "url": "/teaching/"
+  },
+  {
+    "label": "Contact",
+    "url": "/contact/"
+  }
+]

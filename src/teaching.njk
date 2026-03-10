@@ -1,0 +1,26 @@
+---
+layout: layouts/page.njk
+title: Teaching
+lede: Current and recent courses, with room to expand into syllabi and materials later.
+permalink: /teaching/
+---
+{% set sortedCourses = teaching | sortTeaching %}
+
+<section class="section">
+  <div class="simple-list">
+    {% for course in sortedCourses %}
+      <article class="list-item">
+        <h2>{{ course.courseCode }} · {{ course.title }}</h2>
+        <p class="meta">{{ course.term }} {{ course.year }}{% if course.current %} · Current offering{% endif %}</p>
+        <p>{{ course.description }}</p>
+        {% if course.links.length %}
+          <p>
+            {% for link in course.links %}
+              <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
+            {% endfor %}
+          </p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>

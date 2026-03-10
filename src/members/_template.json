@@ -1,0 +1,13 @@
+{
+  "name": "Student Name",
+  "role": "PhD Student",
+  "program": "Computing Science",
+  "joiningDate": "2024-09-01",
+  "researchAreas": [
+    "Research area one",
+    "Research area two"
+  ],
+  "website": "",
+  "googleScholar": "",
+  "photo": "/assets/images/member-placeholder.svg"
+}

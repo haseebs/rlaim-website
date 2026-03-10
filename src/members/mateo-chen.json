@@ -1,0 +1,13 @@
+{
+  "name": "Mateo Chen",
+  "role": "MSc Student",
+  "program": "Computing Science",
+  "joiningDate": "2024-09-01",
+  "researchAreas": [
+    "Offline RL",
+    "Benchmarking and evaluation"
+  ],
+  "website": "https://example.edu/~mateo",
+  "googleScholar": "https://scholar.google.com/citations?user=mateo-chen",
+  "photo": "/assets/images/member-placeholder.svg"
+}

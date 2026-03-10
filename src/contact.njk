@@ -1,0 +1,63 @@
+---
+layout: layouts/page.njk
+title: Contact
+lede: Contact information, office hours, and guidance for prospective students.
+permalink: /contact/
+---
+<section class="section">
+  <div class="contact-panel">
+    <h2>Contact</h2>
+    {% if site.contact.position %}
+      <p><strong>Title:</strong> {{ site.contact.position }}</p>
+    {% endif %}
+    <p><strong>Email:</strong> <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></p>
+    <p><strong>Office:</strong> {{ site.contact.office }}</p>
+    <p><strong>Address:</strong> {{ site.contact.address }}</p>
+
+    {% if site.contact.affiliations.length %}
+      <h3>Affiliations</h3>
+      <ul>
+        {% for affiliation in site.contact.affiliations %}
+          <li><a href="{{ affiliation.url }}">{{ affiliation.label }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if site.contact.profileLinks.length or site.socialLinks.length %}
+      <h3>Links</h3>
+      <ul>
+        {% for link in site.contact.profileLinks %}
+          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+        {% endfor %}
+        {% for link in site.socialLinks %}
+          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <h2>Prospective students</h2>
+  <div class="card">
+    {{ siteText.prospectiveStudents | markdown | safe }}
+  </div>
+</section>
+
+<section class="section">
+  <div class="contact-panel">
+    <h2>Calendar</h2>
+    <div class="calendar-embeds">
+      {% for link in site.contact.calendarLinks %}
+        <div class="calendar-embed">
+          <iframe
+            src="{{ link.url }}"
+            title="{{ link.label }}"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

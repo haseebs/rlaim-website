@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+title: Publications
+lede: Selected papers and a growing archive of research outputs from the lab.
+permalink: /publications/
+---
+{% set publicationGroups = publications | groupPublicationsBySection %}
+
+<section class="page-content">
+  <section class="section">
+
+    {% for group in publicationGroups %}
+      <div class="publication-group">
+        <h2>{{ group.title }}</h2>
+        <div class="publication-list">
+          {% for publication in group.items %}
+            {% set links = publication | publicationLinks %}
+            <article class="list-item publication-entry">
+              <p class="publication-entry__primary">
+                <span class="publication-entry__title">{{ publication.title }}</span>{% if publication.authors %} <span class="publication-entry__authors">{{ publication.authors }}</span>{% endif %}
+              </p>
+              <p class="publication-entry__secondary">
+                <span class="meta">{{ publication.venue }}{% if publication.year %} · {{ publication.year }}{% endif %}</span>{% if links.length %} · {% endif %}
+                {% for link in links %}
+                  <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
+                {% endfor %}
+              </p>
+            </article>
+          {% else %}
+            <p class="meta">No entries yet.</p>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+</section>

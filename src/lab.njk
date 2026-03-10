@@ -1,0 +1,63 @@
+---
+layout: layouts/page.njk
+title: Lab
+lede: Learn about the lab's research areas, current members, and alumni.
+permalink: /lab/
+---
+<section class="section lab-overview">
+  <div class="card lab-overview__photo">
+    <img src="{{ site.groupPhoto }}" alt="Group photo placeholder for the lab">
+  </div>
+  <div class="card lab-overview__text">
+    <h2>Research focus</h2>
+    {{ siteText.researchFocus | markdown | safe }}
+  </div>
+</section>
+
+<section class="section">
+  <h2>Current members</h2>
+  <div class="member-grid member-roster">
+    {% for member in members %}
+      <article class="card member-card">
+        <img src="{{ member.photo }}" alt="Profile placeholder for {{ member.name }}">
+        <div class="member-card__body">
+          <h3>{{ member.name }}</h3>
+          <p class="meta">{{ member.role }} · {{ member.program }}</p>
+          <ul class="tag-list">
+            {% for area in member.researchAreas %}
+              <li class="tag">{{ area }}</li>
+            {% endfor %}
+          </ul>
+          {% if member.website or member.googleScholar %}
+            <p class="member-links">
+              {% if member.website %}
+                <a href="{{ member.website }}">Personal website</a>
+              {% endif %}
+              {% if member.website and member.googleScholar %} · {% endif %}
+              {% if member.googleScholar %}
+                <a href="{{ member.googleScholar }}">Google Scholar</a>
+              {% endif %}
+            </p>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <h2>Alumni</h2>
+  <div class="simple-list">
+    {% for alum in alumni %}
+      <article class="list-item">
+        <p class="alumni-line">
+          <strong>{{ alum.name }}</strong>: {{ alum.role }}
+          {% if alum.joiningYear or alum.endingYear %}
+            {{ alum.joiningYear }}-{{ alum.endingYear }}
+          {% endif %},
+          now {{ alum.currentRole }} at {{ alum.currentOrganization}} {% if alum.website %} (<a href="{{ alum.website }}">website</a>){% endif %}
+        </p>
+      </article>
+    {% endfor %}
+  </div>
+</section>

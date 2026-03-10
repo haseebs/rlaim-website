@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% if title and title != "Home" %}
+        {{ title }} | {{ site.facultyName }}
+      {% else %}
+        {{ site.facultyName }}
+      {% endif %}
+    </title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="/assets/css/main.css">
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container container--header site-header__inner">
+          {% include "partials/navigation.njk" %}
+        </div>
+      </header>
+
+      <main class="site-main">
+        <div class="container container--page">
+          {{ content | safe }}
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

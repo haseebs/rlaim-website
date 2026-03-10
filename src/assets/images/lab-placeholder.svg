@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Lab group placeholder</title>
+  <desc id="desc">Simple placeholder block for a lab group photo.</desc>
+  <rect width="960" height="540" fill="#e7e1d6"/>
+  <circle cx="220" cy="220" r="64" fill="#c8c0b2"/>
+  <circle cx="380" cy="210" r="64" fill="#c8c0b2"/>
+  <circle cx="540" cy="220" r="64" fill="#c8c0b2"/>
+  <circle cx="700" cy="210" r="64" fill="#c8c0b2"/>
+  <rect x="130" y="300" width="640" height="120" rx="20" fill="#c8c0b2"/>
+</svg>

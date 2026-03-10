@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 560" role="img" aria-labelledby="title desc">
+  <title id="title">Faculty portrait placeholder</title>
+  <desc id="desc">Simple placeholder block for a faculty portrait.</desc>
+  <rect width="480" height="560" fill="#e7e1d6"/>
+  <circle cx="240" cy="190" r="90" fill="#c8c0b2"/>
+  <rect x="120" y="310" width="240" height="160" rx="18" fill="#c8c0b2"/>
+</svg>

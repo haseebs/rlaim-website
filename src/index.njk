@@ -1,0 +1,54 @@
+---
+layout: layouts/base.njk
+title: Home
+permalink: /
+---
+{% set latestNews = news | sortNews %}
+
+<section class="hero hero--home">
+  <div class="card hero__media">
+    <img src="{{ site.homeImage }}" alt="Portrait placeholder for {{ site.facultyName }}">
+  </div>
+  <div class="hero__content">
+    <h1>{{ site.facultyName }}</h1>
+    <p class="lede">
+      Assistant Professor at University of Alberta<br>
+      CEO at <a href="https://rlcore.ai/">RLCore</a>
+    </p>
+    <div class="stack">
+      {{ siteText.homeBio | markdown | safe }}
+    </div>
+    <p class="hero-links">
+      <a href="{{ site.socialLinks[0].url }}">Google Scholar</a>
+      <a href="{{ site.contact.profileLinks[0].url }}">Curriculum Vitae</a>
+      <a href="{{ site.photoImage }}">Photo</a>
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Latest news</h2>
+  <div class="simple-list news-timeline">
+    {% for item in latestNews %}
+      {% if loop.index0 < 7 %}
+        <article class="list-item">
+          <p class="meta">{{ item.date }}</p>
+          <p>
+            {% if item.url %}
+              <a href="{{ item.url }}">
+                {{ item.title }}
+              </a>
+            {% else %}
+              {{ item.title }}
+            {% endif %}
+          </p>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section--about">
+  <h2>About Me</h2>
+  {{ siteText.aboutMe | markdown | safe }}
+</section>
