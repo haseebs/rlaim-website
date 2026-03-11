@@ -54,28 +54,35 @@ permalink: /lab/
 
 <section class="section">
   <h2>Alumni</h2>
-  <div class="simple-list">
+  <div class="simple-list alumni-list">
     {% for alum in alumni %}
       <article class="list-item">
-        <p class="alumni-line">
-          <strong>{{ alum.name }}</strong>: previously {{ alum.role }}
-          {% if alum.joiningYear and alum.endingYear %}
-            {{ alum.joiningYear }}-{{ alum.endingYear }}
-          {% elif alum.endingYear %}
-            {{ alum.endingYear }}
-          {% elif alum.joiningYear %}
-            {{ alum.joiningYear }}
+        <p
+          class="alumni-line"
+          {% if alum.name == "Yangchen Pan" %}
+            title="{{ alum.name }}: previously {{ alum.role }}{% if alum.joiningYear and alum.endingYear %} {{ alum.joiningYear }}-{{ alum.endingYear }}{% elif alum.endingYear %} {{ alum.endingYear }}{% elif alum.joiningYear %} {{ alum.joiningYear }}{% endif %}{% if alum.coSupervisor %} (co-supervised {{ alum.coSupervisor }}){% endif %}{% if alum.currentRole or alum.currentOrganization %}, now{% if alum.currentRole %} {{ alum.currentRole }}{% endif %}{% if alum.currentOrganization %}{% if alum.currentRole %} at{% endif %} {{ alum.currentOrganization }}{% endif %}{% endif %}{% if alum.website %}, website: {{ alum.website }}{% endif %}"
           {% endif %}
-          {% if alum.coSupervisor %}
-            (co-supervised {{ alum.coSupervisor }})
-          {% endif %}
-          {% if alum.currentRole or alum.currentOrganization %}
-            , now
-            {% if alum.currentRole %} {{ alum.currentRole }}{% endif %}{% if alum.currentOrganization %}{% if alum.currentRole %} at{% endif %} {{ alum.currentOrganization }}{% endif %}
-          {% endif %}
-          {% if alum.website %}
-            {% if alum.currentRole or alum.currentOrganization %},{% else %},{% endif %} <a href="{{ alum.website | withBaseUrl }}">website</a>
-          {% endif %}
+        >
+          <span class="alumni-line__text">
+            <strong>{{ alum.name }}</strong>: previously {{ alum.role }}
+            {% if alum.joiningYear and alum.endingYear %}
+              {{ alum.joiningYear }}-{{ alum.endingYear }}
+            {% elif alum.endingYear %}
+              {{ alum.endingYear }}
+            {% elif alum.joiningYear %}
+              {{ alum.joiningYear }}
+            {% endif %}
+            {% if alum.coSupervisor %}
+              (co-supervised {{ alum.coSupervisor }})
+            {% endif %}
+            {% if alum.currentRole or alum.currentOrganization %}
+              , now
+              {% if alum.currentRole %} {{ alum.currentRole }}{% endif %}{% if alum.currentOrganization %}{% if alum.currentRole %} at{% endif %} {{ alum.currentOrganization }}{% endif %}
+            {% endif %}
+            {% if alum.website %}
+              {% if alum.currentRole or alum.currentOrganization %},{% else %},{% endif %} <a href="{{ alum.website | withBaseUrl }}">website</a>
+            {% endif %}
+          </span>
         </p>
       </article>
     {% endfor %}
