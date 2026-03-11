@@ -23,7 +23,7 @@ permalink: /teaching/
           {{ course.term }} {{ course.year }}{% if course.current %} · Current offering{% endif %}
           {% if course.links.length %} · {% endif %}
           {% for link in course.links %}
-            <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
+            <a href="{{ link.url | withBaseUrl }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
           {% endfor %}
         </p>
         {% if course.description %}

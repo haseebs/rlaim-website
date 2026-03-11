@@ -5,7 +5,7 @@
       <li>
         <a
           class="site-nav__link{% if isActive %} site-nav__link--active{% endif %}"
-          href="{{ item.url }}"
+          href="{{ item.url | withBaseUrl }}"
           {% if isActive %}aria-current="page"{% endif %}
         >
           {{ item.label }}

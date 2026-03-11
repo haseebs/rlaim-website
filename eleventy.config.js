@@ -1,5 +1,7 @@
 const markdownIt = require("markdown-it");
 
+const baseUrl = (process.env.BASE_URL || "").replace(/\/+$/, "");
+
 const md = markdownIt({
   html: false,
   breaks: true,
@@ -12,6 +14,30 @@ function normalizeUrl(url = "/") {
   }
 
   return url.endsWith("/") ? url : `${url}/`;
+}
+
+function withBaseUrl(url = "/") {
+  if (!url) {
+    return baseUrl || "/";
+  }
+
+  if (/^(?:[a-z]+:)?\/\//i.test(url) || url.startsWith("mailto:") || url.startsWith("tel:") || url.startsWith("#")) {
+    return url;
+  }
+
+  if (!url.startsWith("/")) {
+    return url;
+  }
+
+  if (!baseUrl) {
+    return url;
+  }
+
+  if (url === "/") {
+    return `${baseUrl}/`;
+  }
+
+  return `${baseUrl}${url}`;
 }
 
 function sortPublications(items = []) {
@@ -59,6 +85,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/teachingdocs": "teachingdocs" });
 
+  eleventyConfig.addFilter("withBaseUrl", (value) => withBaseUrl(value));
   eleventyConfig.addFilter("markdown", (value) => md.render(value || ""));
 
   eleventyConfig.addFilter("isActiveNav", (itemUrl, pageUrl) => {

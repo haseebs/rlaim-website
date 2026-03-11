@@ -6,7 +6,7 @@ permalink: /lab/
 ---
 <section class="section lab-overview">
   <div class="card lab-overview__photo">
-    <img src="{{ site.groupPhoto }}" alt="Group photo placeholder for the lab">
+    <img src="{{ site.groupPhoto | withBaseUrl }}" alt="Group photo placeholder for the lab">
   </div>
   <div class="card lab-overview__text">
     <h2>Research focus</h2>
@@ -26,7 +26,7 @@ permalink: /lab/
   <div class="member-grid member-roster">
     {% for member in members %}
       <article class="card member-card">
-        <img src="{{ member.photo }}" alt="Profile placeholder for {{ member.name }}">
+        <img src="{{ member.photo | withBaseUrl }}" alt="Profile placeholder for {{ member.name }}">
         <div class="member-card__body">
           <h3>{{ member.name }}</h3>
           <p class="meta">{{ member.role }}{% if member.coSupervisor %} · co-supervised {{ member.coSupervisor }}{% endif %}</p>
@@ -38,11 +38,11 @@ permalink: /lab/
           {% if member.website or member.googleScholar %}
             <p class="member-links">
               {% if member.website %}
-                <a href="{{ member.website }}">Personal website</a>
+                <a href="{{ member.website | withBaseUrl }}">Personal website</a>
               {% endif %}
               {% if member.website and member.googleScholar %} · {% endif %}
               {% if member.googleScholar %}
-                <a href="{{ member.googleScholar }}">Google Scholar</a>
+                <a href="{{ member.googleScholar | withBaseUrl }}">Google Scholar</a>
               {% endif %}
             </p>
           {% endif %}
@@ -74,7 +74,7 @@ permalink: /lab/
             {% if alum.currentRole %} {{ alum.currentRole }}{% endif %}{% if alum.currentOrganization %}{% if alum.currentRole %} at{% endif %} {{ alum.currentOrganization }}{% endif %}
           {% endif %}
           {% if alum.website %}
-            {% if alum.currentRole or alum.currentOrganization %},{% else %},{% endif %} <a href="{{ alum.website }}">website</a>
+            {% if alum.currentRole or alum.currentOrganization %},{% else %},{% endif %} <a href="{{ alum.website | withBaseUrl }}">website</a>
           {% endif %}
         </p>
       </article>
@@ -84,9 +84,9 @@ permalink: /lab/
 
 <section class="section section--lab-links">
   <h2>Lab Photos</h2>
-  <p><a href="{{ site.groupPhoto }}">Group picture from 2023</a></p>
-  <p><a href="/assets/images/martha-white-group-2020.jpg">Group picture from 2020</a></p>
-  <p><a href="/assets/images/martha-white-group-2019.jpg">Group picture from 2019</a></p>
+  <p><a href="{{ site.groupPhoto | withBaseUrl }}">Group picture from 2023</a></p>
+  <p><a href="{{ '/assets/images/martha-white-group-2020.jpg' | withBaseUrl }}">Group picture from 2020</a></p>
+  <p><a href="{{ '/assets/images/martha-white-group-2019.jpg' | withBaseUrl }}">Group picture from 2019</a></p>
 </section>
 
 <script>

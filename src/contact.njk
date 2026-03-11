@@ -23,7 +23,7 @@ permalink: /contact/
         <h2>Affiliations</h2>
         <ul class="contact-list">
           {% for affiliation in site.contact.affiliations %}
-            <li><a href="{{ affiliation.url }}">{{ affiliation.label }}</a></li>
+            <li><a href="{{ affiliation.url | withBaseUrl }}">{{ affiliation.label }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -45,7 +45,7 @@ permalink: /contact/
       {% for link in site.contact.calendarLinks %}
         <div class="calendar-embed">
           <iframe
-            src="{{ link.url }}"
+            src="{{ link.url | withBaseUrl }}"
             title="{{ link.label }}"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"

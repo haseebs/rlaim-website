@@ -52,7 +52,7 @@ permalink: /publications/
                 {% if links.length %}
                   <p class="publication-entry__links">
                     {% for link in links %}
-                      <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
+                      <a href="{{ link.url | withBaseUrl }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
                     {% endfor %}
                     {% if links.length %} · {% endif %}
                     <button

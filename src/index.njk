@@ -7,7 +7,7 @@ permalink: /
 
 <section class="hero hero--home">
   <div class="card hero__media">
-    <img src="{{ site.homeImage }}" alt="Portrait placeholder for {{ site.facultyName }}">
+    <img src="{{ site.homeImage | withBaseUrl }}" alt="Portrait placeholder for {{ site.facultyName }}">
   </div>
   <div class="hero__content">
     <h1>{{ site.facultyName }}</h1>
@@ -19,9 +19,9 @@ permalink: /
       {{ siteText.homeBio | markdown | safe }}
     </div>
     <p class="hero-links">
-      <a href="{{ site.socialLinks[0].url }}">Google Scholar</a>
-      <a href="{{ site.contact.profileLinks[0].url }}">Curriculum Vitae</a>
-      <a href="{{ site.photoImage }}">Photo</a>
+      <a href="{{ site.socialLinks[0].url | withBaseUrl }}">Google Scholar</a>
+      <a href="{{ site.contact.profileLinks[0].url | withBaseUrl }}">Curriculum Vitae</a>
+      <a href="{{ site.photoImage | withBaseUrl }}">Photo</a>
     </p>
   </div>
 </section>
@@ -35,7 +35,7 @@ permalink: /
           <p class="meta">{{ item.date }}</p>
           <p>
             {% if item.url %}
-              <a href="{{ item.url }}">
+              <a href="{{ item.url | withBaseUrl }}">
                 {{ item.title }}
               </a>
             {% else %}
