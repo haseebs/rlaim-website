@@ -19,7 +19,7 @@ Minimal Eleventy scaffold for an academic lab website.
 - `src/members/*.json`: one JSON file per current lab member
 - `src/alumni/*.json`: one JSON file per alumnus
 - `src/publications/*.bib`: one BibTeX file per publication
-- `src/_data/teaching.json`: teaching history
+- `src/teaching-items/*.md`: one Markdown file per teaching item
 - `src/content/home-bio.md`: homepage bio text
 - `src/content/research-focus.md`: lab research focus text
 - `src/content/prospective-students.md`: prospective-student guidance
@@ -37,5 +37,6 @@ Minimal Eleventy scaffold for an academic lab website.
 - Keep current lab members as one JSON file per person in `src/members/`.
 - Keep alumni as one JSON file per person in `src/alumni/`.
 - Keep publications as one BibTeX file per paper in `src/publications/`.
+- Keep teaching items as one Markdown file per course in `src/teaching-items/`.
 - Keep longer prose in `src/content`.
 - Avoid editing layout files unless you are changing site structure or presentation.

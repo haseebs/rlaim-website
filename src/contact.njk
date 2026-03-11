@@ -5,47 +5,41 @@ lede: Contact information, office hours, and guidance for prospective students.
 permalink: /contact/
 ---
 <section class="section">
-  <div class="contact-panel">
-    <h2>Contact</h2>
-    {% if site.contact.position %}
-      <p><strong>Title:</strong> {{ site.contact.position }}</p>
-    {% endif %}
-    <p><strong>Email:</strong> <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></p>
-    <p><strong>Office:</strong> {{ site.contact.office }}</p>
-    <p><strong>Address:</strong> {{ site.contact.address }}</p>
+  <div class="two-column">
+    <div class="contact-panel contact-panel--details contact-page-block">
+      <h2>Contact</h2>
+      {% if site.contact.position %}
+        <p>Title: {{ site.contact.position }}</p>
+      {% endif %}
+      <p>Email: {{ site.contact.email }}</p>
+      <p>Office: {{ site.contact.office }}</p>
+      {% if site.contact.address %}
+        <p>Address: {{ site.contact.address }}</p>
+      {% endif %}
+    </div>
 
     {% if site.contact.affiliations.length %}
-      <h3>Affiliations</h3>
-      <ul>
-        {% for affiliation in site.contact.affiliations %}
-          <li><a href="{{ affiliation.url }}">{{ affiliation.label }}</a></li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    {% if site.contact.profileLinks.length or site.socialLinks.length %}
-      <h3>Links</h3>
-      <ul>
-        {% for link in site.contact.profileLinks %}
-          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
-        {% endfor %}
-        {% for link in site.socialLinks %}
-          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
-        {% endfor %}
-      </ul>
+      <div class="contact-panel contact-page-block">
+        <h2>Affiliations</h2>
+        <ul class="contact-list">
+          {% for affiliation in site.contact.affiliations %}
+            <li><a href="{{ affiliation.url }}">{{ affiliation.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
     {% endif %}
   </div>
 </section>
 
 <section class="section">
   <h2>Prospective students</h2>
-  <div class="card">
+  <div class="card contact-page-block">
     {{ siteText.prospectiveStudents | markdown | safe }}
   </div>
 </section>
 
 <section class="section">
-  <div class="contact-panel">
+  <div class="contact-panel contact-page-block">
     <h2>Calendar</h2>
     <div class="calendar-embeds">
       {% for link in site.contact.calendarLinks %}

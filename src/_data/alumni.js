@@ -16,6 +16,7 @@ function normalizeAlumnus(alumnus = {}, fileName = "") {
     id: path.basename(fileName, ".json"),
     name: alumnus.name || "",
     role: alumnus.role || alumnus.degree || "",
+    coSupervisor: alumnus.coSupervisor || "",
     joiningDate,
     endingDate,
     joiningYear: yearFromDate(joiningDate),

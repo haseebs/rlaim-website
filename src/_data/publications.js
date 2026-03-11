@@ -5,6 +5,7 @@ const publicationsDir = path.join(__dirname, "..", "publications");
 
 const linkFields = [
   ["pdf", "PDF"],
+  ["code", "Code"],
   ["project", "Project page"],
   ["video", "Video"],
   ["demo", "Demo"],
@@ -244,6 +245,40 @@ function formatAuthors(authorField = "") {
     .join(", ");
 }
 
+function buildVenueAcronym(venue = "") {
+  const parentheticalMatches = [...venue.matchAll(/\(([A-Za-z][A-Za-z0-9-]*)\)/g)];
+
+  if (parentheticalMatches.length) {
+    return parentheticalMatches[parentheticalMatches.length - 1][1];
+  }
+
+  const uppercaseTokens = venue.match(/\b[A-Z][A-Z0-9-]{1,}\b/g) || [];
+
+  if (uppercaseTokens.length) {
+    return uppercaseTokens[0];
+  }
+
+  const stopWords = new Set(["a", "an", "and", "for", "in", "of", "on", "the", "to", "via", "with"]);
+  const acronym = venue
+    .split(/[^A-Za-z0-9]+/)
+    .filter(Boolean)
+    .filter((word) => !stopWords.has(word.toLowerCase()))
+    .map((word) => word[0].toUpperCase())
+    .join("");
+
+  return acronym || "";
+}
+
+function buildVenueTag(venue = "", year = 0) {
+  const acronym = buildVenueAcronym(venue);
+
+  if (!acronym || !year) {
+    return "";
+  }
+
+  return `${acronym}-${String(year).slice(-2)}`;
+}
+
 function buildLinks(fields) {
   const links = [];
 
@@ -280,6 +315,7 @@ function buildPublication(fileName, parsed) {
     authors: formatAuthors(fields.author || ""),
     venue: cleanText(fields.booktitle || fields.journal || fields.publisher || ""),
     year,
+    venueTag: buildVenueTag(cleanText(fields.booktitle || fields.journal || fields.publisher || ""), year),
     type: inferPublicationType(entryType, fields),
     group: cleanText(fields.group || fields.category || ""),
     order: Number.parseInt(fields.order, 10) || 999,

@@ -6,25 +6,76 @@ permalink: /publications/
 ---
 {% set publicationGroups = publications | groupPublicationsBySection %}
 
-<section class="page-content">
+<section class="page-content publications-page" data-publications-page>
   <section class="section">
-
     {% for group in publicationGroups %}
-      <div class="publication-group">
-        <h2>{{ group.title }}</h2>
+      <div class="publication-group{% if group.title == 'Publications' %} publication-group--main{% endif %}{% if group.title == 'Preprints and Working papers' %} publication-group--preprints{% endif %}">
+        <div class="publication-group__heading">
+          <h2>{{ group.title }}</h2>
+          {% if group.title == 'Publications' %}
+            <div class="publications-controls">
+              <button type="button" class="publications-toggle" data-acronym-toggle>
+                Hide acronyms
+              </button>
+            </div>
+          {% elif group.title == 'Preprints and Working papers' %}
+            <div class="publications-controls">
+              <button type="button" class="publications-toggle" data-preprint-lines-toggle>
+                Hide lines
+              </button>
+            </div>
+          {% endif %}
+        </div>
         <div class="publication-list">
           {% for publication in group.items %}
             {% set links = publication | publicationLinks %}
-            <article class="list-item publication-entry">
-              <p class="publication-entry__primary">
-                <span class="publication-entry__title">{{ publication.title }}</span>{% if publication.authors %} <span class="publication-entry__authors">{{ publication.authors }}</span>{% endif %}
-              </p>
-              <p class="publication-entry__secondary">
-                <span class="meta">{{ publication.venue }}{% if publication.year %} · {{ publication.year }}{% endif %}</span>{% if links.length %} · {% endif %}
-                {% for link in links %}
-                  <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
-                {% endfor %}
-              </p>
+            <article class="list-item publication-entry{% if group.title != 'Publications' %} publication-entry--no-badge{% endif %}">
+              <div class="publication-entry__badge-wrap">
+                {% if group.title == 'Publications' and publication.venueTag %}
+                  <span class="publication-entry__badge">[{{ publication.venueTag }}]</span>
+                {% endif %}
+              </div>
+              <div class="publication-entry__content">
+                <p class="publication-entry__primary">
+                  <span class="publication-entry__title">{{ publication.title }}</span>
+                </p>
+                {% if publication.venue or publication.year %}
+                  <p class="publication-entry__secondary">
+                    <span class="meta">{{ publication.venue }}{% if publication.year %} · {{ publication.year }}{% endif %}</span>
+                  </p>
+                {% endif %}
+                {% if publication.authors %}
+                  <p class="publication-entry__authors-line">
+                    <span class="publication-entry__authors">{{ publication.authors }}</span>
+                  </p>
+                {% endif %}
+                {% if links.length %}
+                  <p class="publication-entry__links">
+                    {% for link in links %}
+                      <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
+                    {% endfor %}
+                    {% if links.length %} · {% endif %}
+                    <button
+                      type="button"
+                      class="publication-entry__copy"
+                      data-copy-target="bibtex-{{ publication.id }}"
+                    >
+                      Copy BibTeX
+                    </button>
+                  </p>
+                {% else %}
+                  <p class="publication-entry__links">
+                    <button
+                      type="button"
+                      class="publication-entry__copy"
+                      data-copy-target="bibtex-{{ publication.id }}"
+                    >
+                      Copy BibTeX
+                    </button>
+                  </p>
+                {% endif %}
+                <textarea id="bibtex-{{ publication.id }}" class="publication-entry__bibtex" tabindex="-1" aria-hidden="true">{{ publication.bibtex }}</textarea>
+              </div>
             </article>
           {% else %}
             <p class="meta">No entries yet.</p>
@@ -34,3 +85,90 @@ permalink: /publications/
     {% endfor %}
   </section>
 </section>
+
+<script>
+  (() => {
+    const page = document.querySelector("[data-publications-page]");
+    const toggle = document.querySelector("[data-acronym-toggle]");
+    const preprintLinesToggle = document.querySelector("[data-preprint-lines-toggle]");
+
+    function syncToggleLabel() {
+      if (!page || !toggle) {
+        return;
+      }
+
+      toggle.textContent = page.classList.contains("publications-page--hide-acronyms")
+        ? "Show acronyms"
+        : "Hide acronyms";
+    }
+
+    if (page && toggle) {
+      syncToggleLabel();
+
+      toggle.addEventListener("click", () => {
+        page.classList.toggle("publications-page--hide-acronyms");
+        syncToggleLabel();
+      });
+    }
+
+    function syncPreprintLinesLabel() {
+      if (!page || !preprintLinesToggle) {
+        return;
+      }
+
+      preprintLinesToggle.textContent = page.classList.contains("publications-page--hide-preprint-lines")
+        ? "Show lines"
+        : "Hide lines";
+    }
+
+    if (page && preprintLinesToggle) {
+      syncPreprintLinesLabel();
+
+      preprintLinesToggle.addEventListener("click", () => {
+        page.classList.toggle("publications-page--hide-lines");
+        syncPreprintLinesLabel();
+      });
+    }
+
+    async function copyBibTeX(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const probe = document.createElement("textarea");
+      probe.value = text;
+      probe.setAttribute("readonly", "");
+      probe.style.position = "absolute";
+      probe.style.left = "-9999px";
+      document.body.appendChild(probe);
+      probe.select();
+      document.execCommand("copy");
+      document.body.removeChild(probe);
+    }
+
+    for (const button of document.querySelectorAll(".publication-entry__copy")) {
+      button.addEventListener("click", async () => {
+        const targetId = button.getAttribute("data-copy-target");
+        const source = targetId ? document.getElementById(targetId) : null;
+
+        if (!source) {
+          return;
+        }
+
+        const originalLabel = button.textContent;
+
+        try {
+          await copyBibTeX(source.value);
+          button.textContent = "Copied";
+        } catch {
+          button.textContent = "Copy failed";
+        }
+
+        window.setTimeout(() => {
+          button.textContent = originalLabel;
+        }, 1200);
+      });
+    }
+  })();
+</script>

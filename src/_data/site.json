@@ -9,9 +9,9 @@
   "photoImage": "/assets/images/martha-white-photo.jpg",
   "groupPhoto": "/assets/images/martha-white-group-2023.png",
   "contact": {
-    "email": "whitem@ualberta.ca",
+    "email": "whitem [at] ualberta [dot] ca",
     "office": "UCOMM 7-243",
-    "address": "Department of Computing Science, University of Alberta",
+    "address": "University Commons, University of Alberta",
     "position": "Associate Professor",
     "affiliations": [
       {
@@ -34,11 +34,11 @@
     "profileLinks": [
       {
         "label": "Curriculum Vitae",
-        "url": "https://webdocs.cs.ualberta.ca/~whitem/cv/cv.pdf"
+        "url": "https://webdocs.cs.ualberta.ca/~whitem/publications/cv.pdf"
       },
       {
-        "label": "Bio and Photo",
-        "url": "https://webdocs.cs.ualberta.ca/~whitem/bio.html"
+        "label": "Photo",
+        "url": "/assets/images/martha-white-photo.jpg"
       }
     ],
     "calendarLinks": [
@@ -55,7 +55,7 @@
   "socialLinks": [
     {
       "label": "Google Scholar",
-      "url": "https://scholar.google.ca/"
+      "url": "https://scholar.google.com/citations?user=t5zdD_IAAAAJ&hl=en"
     },
     {
       "label": "RLCore",

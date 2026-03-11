@@ -18,6 +18,7 @@ function normalizeMember(member = {}, fileName = "") {
     id: path.basename(fileName, ".json"),
     name: member.name || "",
     role: member.role || "",
+    coSupervisor: member.coSupervisor || "",
     program: member.program || "",
     researchAreas: Array.isArray(member.researchAreas) ? member.researchAreas : [],
     website: member.website || "",

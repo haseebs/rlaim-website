@@ -1,6 +1,7 @@
 {
   "name": "Student Name",
   "role": "PhD Student",
+  "coSupervisor": "",
   "joiningDate": "2021-09-01",
   "endingDate": "2025-06-01",
   "currentRole": "Research Scientist",

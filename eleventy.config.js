@@ -57,6 +57,7 @@ function publicationSectionTitle(publication = {}) {
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({ "src/teachingdocs": "teachingdocs" });
 
   eleventyConfig.addFilter("markdown", (value) => md.render(value || ""));
 

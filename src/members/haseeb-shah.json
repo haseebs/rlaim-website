@@ -1,0 +1,16 @@
+{
+  "name": "Haseeb Shah",
+  "role": "PhD Student",
+  "coSupervisor": "",
+  "program": "Computing Science",
+  "joiningDate": "",
+  "researchAreas": [
+    "Policy Parameterizations",
+    "Applied RL",
+    "Online and Offline RL",
+    "GVFs"
+  ],
+  "website": "http://haseeb.sh/",
+  "googleScholar": "https://scholar.google.com/citations?user=NKRLBscAAAAJ",
+  "photo": "/assets/images/member-placeholder.svg"
+}

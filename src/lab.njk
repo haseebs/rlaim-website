@@ -14,15 +14,22 @@ permalink: /lab/
   </div>
 </section>
 
-<section class="section">
-  <h2>Current members</h2>
+<section class="section lab-members-section" data-lab-members-section>
+  <div class="section-heading-controls">
+    <h2>Current members</h2>
+    <div class="section-controls">
+      <button type="button" class="section-toggle" data-lab-lines-toggle>
+        Hide lines
+      </button>
+    </div>
+  </div>
   <div class="member-grid member-roster">
     {% for member in members %}
       <article class="card member-card">
         <img src="{{ member.photo }}" alt="Profile placeholder for {{ member.name }}">
         <div class="member-card__body">
           <h3>{{ member.name }}</h3>
-          <p class="meta">{{ member.role }} · {{ member.program }}</p>
+          <p class="meta">{{ member.role }}{% if member.coSupervisor %} · co-supervised {{ member.coSupervisor }}{% endif %}</p>
           <ul class="tag-list">
             {% for area in member.researchAreas %}
               <li class="tag">{{ area }}</li>
@@ -51,13 +58,59 @@ permalink: /lab/
     {% for alum in alumni %}
       <article class="list-item">
         <p class="alumni-line">
-          <strong>{{ alum.name }}</strong>: {{ alum.role }}
-          {% if alum.joiningYear or alum.endingYear %}
+          <strong>{{ alum.name }}</strong>: previously {{ alum.role }}
+          {% if alum.joiningYear and alum.endingYear %}
             {{ alum.joiningYear }}-{{ alum.endingYear }}
-          {% endif %},
-          now {{ alum.currentRole }} at {{ alum.currentOrganization}} {% if alum.website %} (<a href="{{ alum.website }}">website</a>){% endif %}
+          {% elif alum.endingYear %}
+            {{ alum.endingYear }}
+          {% elif alum.joiningYear %}
+            {{ alum.joiningYear }}
+          {% endif %}
+          {% if alum.coSupervisor %}
+            (co-supervised {{ alum.coSupervisor }})
+          {% endif %}
+          {% if alum.currentRole or alum.currentOrganization %}
+            , now
+            {% if alum.currentRole %} {{ alum.currentRole }}{% endif %}{% if alum.currentOrganization %}{% if alum.currentRole %} at{% endif %} {{ alum.currentOrganization }}{% endif %}
+          {% endif %}
+          {% if alum.website %}
+            {% if alum.currentRole or alum.currentOrganization %},{% else %},{% endif %} <a href="{{ alum.website }}">website</a>
+          {% endif %}
         </p>
       </article>
     {% endfor %}
   </div>
 </section>
+
+<section class="section section--lab-links">
+  <h2>Lab Photos</h2>
+  <p><a href="{{ site.groupPhoto }}">Group picture from 2023</a></p>
+  <p><a href="/assets/images/martha-white-group-2020.jpg">Group picture from 2020</a></p>
+  <p><a href="/assets/images/martha-white-group-2019.jpg">Group picture from 2019</a></p>
+</section>
+
+<script>
+  (() => {
+    const section = document.querySelector("[data-lab-members-section]");
+    const toggle = document.querySelector("[data-lab-lines-toggle]");
+
+    function syncLabel() {
+      if (!section || !toggle) {
+        return;
+      }
+
+      toggle.textContent = section.classList.contains("lab-members-section--hide-lines")
+        ? "Show lines"
+        : "Hide lines";
+    }
+
+    if (section && toggle) {
+      syncLabel();
+
+      toggle.addEventListener("click", () => {
+        section.classList.toggle("lab-members-section--hide-lines");
+        syncLabel();
+      });
+    }
+  })();
+</script>

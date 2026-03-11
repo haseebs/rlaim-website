@@ -6,21 +6,56 @@ permalink: /teaching/
 ---
 {% set sortedCourses = teaching | sortTeaching %}
 
-<section class="section">
-  <div class="simple-list">
+<section class="section teaching-page">
+  <div class="section-heading-controls">
+    <div></div>
+    <div class="section-controls">
+      <button type="button" class="section-toggle" data-teaching-lines-toggle>
+        Hide lines
+      </button>
+    </div>
+  </div>
+  <div class="simple-list teaching-list">
     {% for course in sortedCourses %}
       <article class="list-item">
-        <h2>{{ course.courseCode }} · {{ course.title }}</h2>
-        <p class="meta">{{ course.term }} {{ course.year }}{% if course.current %} · Current offering{% endif %}</p>
-        <p>{{ course.description }}</p>
-        {% if course.links.length %}
-          <p>
-            {% for link in course.links %}
-              <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
-            {% endfor %}
-          </p>
+        <h2>{% if course.courseCode and course.courseCode != "?" %}{{ course.courseCode }} · {% endif %}{{ course.title }}</h2>
+        <p class="meta">
+          {{ course.term }} {{ course.year }}{% if course.current %} · Current offering{% endif %}
+          {% if course.links.length %} · {% endif %}
+          {% for link in course.links %}
+            <a href="{{ link.url }}">{{ link.label }}</a>{% if not loop.last %} · {% endif %}
+          {% endfor %}
+        </p>
+        {% if course.description %}
+          {{ course.description | markdown | safe }}
         {% endif %}
       </article>
     {% endfor %}
   </div>
 </section>
+
+<script>
+  (() => {
+    const section = document.querySelector(".teaching-page");
+    const toggle = document.querySelector("[data-teaching-lines-toggle]");
+
+    function syncLabel() {
+      if (!section || !toggle) {
+        return;
+      }
+
+      toggle.textContent = section.classList.contains("teaching-page--hide-lines")
+        ? "Show lines"
+        : "Hide lines";
+    }
+
+    if (section && toggle) {
+      syncLabel();
+
+      toggle.addEventListener("click", () => {
+        section.classList.toggle("teaching-page--hide-lines");
+        syncLabel();
+      });
+    }
+  })();
+</script>

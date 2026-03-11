@@ -1,6 +1,7 @@
 {
   "name": "Student Name",
   "role": "PhD Student",
+  "coSupervisor": "",
   "program": "Computing Science",
   "joiningDate": "2024-09-01",
   "researchAreas": [
