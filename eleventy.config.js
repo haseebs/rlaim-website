@@ -55,18 +55,18 @@ function sortPublications(items = []) {
 }
 
 function publicationSectionTitle(publication = {}) {
-  const explicitGroup = (publication.group || "").toLowerCase();
+  const explicitSection = (publication.section || "").toLowerCase();
   const type = (publication.type || "").toLowerCase();
 
-  if (explicitGroup.includes("thes")) {
+  if (explicitSection.includes("thes")) {
     return "Theses";
   }
 
-  if (explicitGroup.includes("preprint") || explicitGroup.includes("working")) {
+  if (explicitSection.includes("preprint") || explicitSection.includes("working")) {
     return "Preprints and Working papers";
   }
 
-  if (explicitGroup.includes("publication")) {
+  if (explicitSection.includes("publication")) {
     return "Publications";
   }
 

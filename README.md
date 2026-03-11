@@ -32,7 +32,9 @@ Open the local preview URL `http://localhost:8080`.
 - `src/_data/news.json`: homepage news items
 - `src/members/*.json`: one JSON file per current lab member
 - `src/alumni/*.json`: one JSON file per alumnus
-- `src/publications/*.bib`: one BibTeX file per publication
+- `src/publications/publications/*.bib`: one bib file per published paper
+- `src/publications/preprints-and-working-papers/*.bib`: one bib file per preprint or working paper
+- `src/publications/theses/*.bib`: one bib file per thesis
 - `src/teaching-items/*.md`: one Markdown file per teaching item
 - `src/content/home-bio.md`: homepage bio text
 - `src/content/research-focus.md`: lab research focus text

@@ -2,6 +2,11 @@ const fs = require("fs");
 const path = require("path");
 
 const publicationsDir = path.join(__dirname, "..", "publications");
+const publicationGroups = {
+  publications: "Publications",
+  "preprints-and-working-papers": "Preprints and Working papers",
+  theses: "Theses"
+};
 
 const linkFields = [
   ["pdf", "PDF"],
@@ -301,13 +306,39 @@ function buildLinks(fields) {
   return links;
 }
 
-function buildPublication(fileName, parsed) {
+function readPublicationFiles(dirPath) {
+  return fs
+    .readdirSync(dirPath, { withFileTypes: true })
+    .flatMap((entry) => {
+      const entryPath = path.join(dirPath, entry.name);
+
+      if (entry.isDirectory()) {
+        return readPublicationFiles(entryPath);
+      }
+
+      if (!entry.isFile() || !entry.name.endsWith(".bib") || entry.name.startsWith("_")) {
+        return [];
+      }
+
+      return [entryPath];
+    });
+}
+
+function inferPublicationSection(filePath) {
+  const relativeDir = path.relative(publicationsDir, path.dirname(filePath));
+  const [topLevelDir] = relativeDir.split(path.sep).filter(Boolean);
+
+  return publicationGroups[topLevelDir] || "Publications";
+}
+
+function buildPublication(filePath, parsed) {
   if (!parsed) {
     return null;
   }
 
   const { entryType, key, fields, raw } = parsed;
   const year = Number.parseInt(fields.year, 10) || 0;
+  const fileName = path.basename(filePath);
 
   return {
     id: key || path.basename(fileName, ".bib"),
@@ -317,7 +348,7 @@ function buildPublication(fileName, parsed) {
     year,
     venueTag: buildVenueTag(cleanText(fields.booktitle || fields.journal || fields.publisher || ""), year),
     type: inferPublicationType(entryType, fields),
-    group: cleanText(fields.group || fields.category || ""),
+    section: inferPublicationSection(filePath),
     order: Number.parseInt(fields.order, 10) || 999,
     links: buildLinks(fields),
     bibtex: raw
@@ -329,15 +360,12 @@ module.exports = function () {
     return [];
   }
 
-  return fs
-    .readdirSync(publicationsDir)
-    .filter((fileName) => fileName.endsWith(".bib") && !fileName.startsWith("_"))
+  return readPublicationFiles(publicationsDir)
     .sort()
-    .map((fileName) => {
-      const inputPath = path.join(publicationsDir, fileName);
+    .map((inputPath) => {
       const contents = fs.readFileSync(inputPath, "utf8");
 
-      return buildPublication(fileName, parseBibTeX(contents));
+      return buildPublication(inputPath, parseBibTeX(contents));
     })
     .filter(Boolean);
 };
