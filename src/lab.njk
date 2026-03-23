@@ -14,15 +14,8 @@ permalink: /lab/
   </div>
 </section>
 
-<section class="section lab-members-section" data-lab-members-section>
-  <div class="section-heading-controls">
-    <h2>Current members</h2>
-    <div class="section-controls">
-      <button type="button" class="section-toggle" data-lab-lines-toggle>
-        Hide lines
-      </button>
-    </div>
-  </div>
+<section class="section lab-members-section">
+  <h2>Current members</h2>
   <div class="member-grid member-roster">
     {% for member in members %}
       <article class="card member-card">
@@ -95,29 +88,3 @@ permalink: /lab/
   <p><a href="{{ '/assets/images/martha-white-group-2020.jpg' | withBaseUrl }}">Group picture from 2020</a></p>
   <p><a href="{{ '/assets/images/martha-white-group-2019.jpg' | withBaseUrl }}">Group picture from 2019</a></p>
 </section>
-
-<script>
-  (() => {
-    const section = document.querySelector("[data-lab-members-section]");
-    const toggle = document.querySelector("[data-lab-lines-toggle]");
-
-    function syncLabel() {
-      if (!section || !toggle) {
-        return;
-      }
-
-      toggle.textContent = section.classList.contains("lab-members-section--hide-lines")
-        ? "Show lines"
-        : "Hide lines";
-    }
-
-    if (section && toggle) {
-      syncLabel();
-
-      toggle.addEventListener("click", () => {
-        section.classList.toggle("lab-members-section--hide-lines");
-        syncLabel();
-      });
-    }
-  })();
-</script>

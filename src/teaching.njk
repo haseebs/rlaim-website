@@ -1,20 +1,12 @@
 ---
 layout: layouts/page.njk
 title: Teaching
-lede: Current and recent courses, with room to expand into syllabi and materials later.
+lede: Current and recent courses
 permalink: /teaching/
 ---
 {% set sortedCourses = teaching | sortTeaching %}
 
 <section class="section teaching-page">
-  <div class="section-heading-controls">
-    <div></div>
-    <div class="section-controls">
-      <button type="button" class="section-toggle" data-teaching-lines-toggle>
-        Hide lines
-      </button>
-    </div>
-  </div>
   <div class="simple-list teaching-list">
     {% for course in sortedCourses %}
       <article class="list-item">
@@ -33,29 +25,3 @@ permalink: /teaching/
     {% endfor %}
   </div>
 </section>
-
-<script>
-  (() => {
-    const section = document.querySelector(".teaching-page");
-    const toggle = document.querySelector("[data-teaching-lines-toggle]");
-
-    function syncLabel() {
-      if (!section || !toggle) {
-        return;
-      }
-
-      toggle.textContent = section.classList.contains("teaching-page--hide-lines")
-        ? "Show lines"
-        : "Hide lines";
-    }
-
-    if (section && toggle) {
-      syncLabel();
-
-      toggle.addEventListener("click", () => {
-        section.classList.toggle("teaching-page--hide-lines");
-        syncLabel();
-      });
-    }
-  })();
-</script>

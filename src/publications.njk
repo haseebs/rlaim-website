@@ -6,25 +6,12 @@ permalink: /publications/
 ---
 {% set publicationGroups = publications | groupPublicationsBySection %}
 
-<section class="page-content publications-page" data-publications-page>
+<section class="page-content publications-page">
   <section class="section">
     {% for group in publicationGroups %}
       <div class="publication-group{% if group.title == 'Publications' %} publication-group--main{% endif %}{% if group.title == 'Preprints and Working papers' %} publication-group--preprints{% endif %}">
         <div class="publication-group__heading">
           <h2>{{ group.title }}</h2>
-          {% if group.title == 'Publications' %}
-            <div class="publications-controls">
-              <button type="button" class="publications-toggle" data-acronym-toggle>
-                Hide acronyms
-              </button>
-            </div>
-          {% elif group.title == 'Preprints and Working papers' %}
-            <div class="publications-controls">
-              <button type="button" class="publications-toggle" data-preprint-lines-toggle>
-                Hide lines
-              </button>
-            </div>
-          {% endif %}
         </div>
         <div class="publication-list">
           {% for publication in group.items %}
@@ -88,48 +75,6 @@ permalink: /publications/
 
 <script>
   (() => {
-    const page = document.querySelector("[data-publications-page]");
-    const toggle = document.querySelector("[data-acronym-toggle]");
-    const preprintLinesToggle = document.querySelector("[data-preprint-lines-toggle]");
-
-    function syncToggleLabel() {
-      if (!page || !toggle) {
-        return;
-      }
-
-      toggle.textContent = page.classList.contains("publications-page--hide-acronyms")
-        ? "Show acronyms"
-        : "Hide acronyms";
-    }
-
-    if (page && toggle) {
-      syncToggleLabel();
-
-      toggle.addEventListener("click", () => {
-        page.classList.toggle("publications-page--hide-acronyms");
-        syncToggleLabel();
-      });
-    }
-
-    function syncPreprintLinesLabel() {
-      if (!page || !preprintLinesToggle) {
-        return;
-      }
-
-      preprintLinesToggle.textContent = page.classList.contains("publications-page--hide-preprint-lines")
-        ? "Show lines"
-        : "Hide lines";
-    }
-
-    if (page && preprintLinesToggle) {
-      syncPreprintLinesLabel();
-
-      preprintLinesToggle.addEventListener("click", () => {
-        page.classList.toggle("publications-page--hide-lines");
-        syncPreprintLinesLabel();
-      });
-    }
-
     async function copyBibTeX(text) {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
